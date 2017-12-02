@@ -1,0 +1,26 @@
+# JavaScript
+/node_modules/
+/index.js
+
+# WordPress
+/wp-admin/
+/wp-content/index.php
+/wp-content/plugins/akismet/
+/wp-content/plugins/hello.php
+/wp-content/plugins/index.php
+/wp-content/themes/index.php
+/wp-content/themes/twenty*/
+/wp-includes/
+/index.php
+/license.txt
+/readme.html
+/wp-[ablmst]*.php
+/wp-comm*.php
+/wp-config-sample.php
+/wp-cron.php
+/xmlrpc.php
+
+# Image
+/lib/cache/
+/lib/modules
+/lib/modules/

@@ -1,0 +1,36 @@
+version: 0.2
+
+env:
+  variables:
+    WORDPRESS: 4.9.1
+
+# Another option: Download wordpress.zip, add git ls-files minus ignored, use as single artifact
+#                 ... but can't pre-warm opcache.file_cache :-(
+
+phases:
+  install:
+    commands:
+      - bash ci/php.sh
+      - curl --silent --location https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem --output lib/rds-combined-ca-bundle.pem
+      - curl --silent --location https://wordpress.org/wordpress-${WORDPRESS}.tar.gz | tar --strip-components=1 -xzf-
+      - yarn install
+  build:
+    commands:
+      # - bash ci/opcache.sh
+      - yarn build
+
+artifacts:
+  files:
+    # WordPress@Edge
+    - index.js
+    - lib/**/*
+    # WordPress
+    - index.php
+    - wp-*.php
+    - wp-*/**/*
+    - xmlrpc.php
+
+
+cache:
+  paths:
+    - node_modules/**/*

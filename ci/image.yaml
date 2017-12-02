@@ -1,0 +1,21 @@
+version: 0.2
+
+env:
+  variables:
+    IMAGE_REPO: wordpress-edge
+    IMAGE_TAG: build
+    AWS_ACCOUNT_ID: 075941094346
+
+phases:
+  pre_build:
+    commands:
+      - $(aws ecr get-login --region $AWS_REGION --registry-ids $AWS_ACCOUNT_ID)
+  build:
+    commands:
+      # Can't --cache-from $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_REPO:$IMAGE_TAG
+      # because CodeBuild's Docker 1.12.1 on Ubuntu 14.04 doesn't support it.
+      # - docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_REPO:$IMAGE_TAG || true
+      - docker build --pull --tag $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_REPO:$IMAGE_TAG ci/image
+  post_build:
+    commands:
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_REPO:$IMAGE_TAG
