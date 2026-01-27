@@ -1,0 +1,4 @@
+name: php
+runs:
+  using: docker
+  image: Dockerfile
