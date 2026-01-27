@@ -8,18 +8,18 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v6
-      # - name: Setup PHP
-      #   uses: shivammathur/setup-php@v2
-      #   with:
-      #     php-version: 8.4
-      #     tools: composer:v2
-      # - run: composer install --no-dev
-      # - run: ./ci/opcache.sh
       - name: Download composer.phar
         env:
           GH_TOKEN: ${{github.token}}
         run: |
           gh release --repo composer/composer download --pattern composer.phar
           gh attestation verify --repo composer/composer composer.phar
-      - uses: ./.github/actions/php
-      - run: /bin/ls -lh
+      - name: Composer
+        uses: ./.github/actions/php
+      - run: |
+          ln -s . zero
+          zip -rX9 zero.zip zero/bootstrap.php zero/vendor zero/wordpress zero/wp-config.php
+      - uses: actions/upload-artifact@v6
+        with:
+          name: zero.zip
+          path: zero.zip
