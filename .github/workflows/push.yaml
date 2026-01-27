@@ -22,4 +22,4 @@ jobs:
           gh release --repo composer/composer download --pattern composer.phar
           gh attestation verify --repo composer/composer composer.phar
       - uses: ./.github/actions/php
-      - run: du -sh zero
+      - run: /bin/ls -lh
