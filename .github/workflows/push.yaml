@@ -16,10 +16,14 @@ jobs:
           gh attestation verify --repo composer/composer composer.phar
       - name: Composer
         uses: ./.github/actions/php
-      - run: |
-          ln -s . zero
-          zip -rX9 zero.zip zero/bootstrap.php zero/vendor zero/wordpress zero/wp-config.php
+      - run: ln -s . zero
       - uses: actions/upload-artifact@v6
         with:
-          name: zero.zip
-          path: zero.zip
+          name: zero
+          path: |
+            bref
+            zero/bootstrap.php
+            zero/opcache
+            zero/vendor
+            zero/wordpress
+            zero/wp-config.php
