@@ -13,9 +13,9 @@ jobs:
       #   with:
       #     php-version: 8.4
       #     tools: composer:v2
-      # - run: |
-      #     gh release --repo composer/composer download --pattern composer.phar
-      #     gh attestation verify --repo composer/composer composer.phar
       # - run: composer install --no-dev
       # - run: ./ci/opcache.sh
+      - run: |
+          gh release --repo composer/composer download --pattern composer.phar
+          gh attestation verify --repo composer/composer composer.phar
       - uses: ./.github/actions/php
