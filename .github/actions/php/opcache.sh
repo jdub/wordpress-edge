@@ -1,5 +1,5 @@
 #!/bin/bash
-ln -v -s . /opt/zero
+ln -v -s /github/workspace /opt/zero
 mkdir -p /opt/zero/opcache
 
 php composer.phar install --no-dev
