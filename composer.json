@@ -1,0 +1,29 @@
+{
+    "config": {
+        "allow-plugins": {
+            "johnpbloch/wordpress-core-installer": true
+        },
+        "classmap-authoritative": true,
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.3"
+        }
+    },
+
+    "require": {
+        "aws/aws-sdk-php": "^3.369",
+        "bref/bref": "=2.4.17",
+        "johnpbloch/wordpress": "^6.9",
+        "php": "^8.3",
+        "amnuts/opcache-gui": "^3.6"
+    },
+
+    "scripts": {
+        "pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices"
+    },
+    "extra": {
+        "aws/aws-sdk-php": [
+            "Rds"
+        ]
+    }
+}
