@@ -7,12 +7,15 @@ jobs:
     name: Layer
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.4
-          tools: composer:v2
-      - run: composer install --no-dev
-      - run: ./ci/opcache.sh
-      - run: find zero -type f
+      # - uses: actions/checkout@v4
+      # - name: Setup PHP
+      #   uses: shivammathur/setup-php@v2
+      #   with:
+      #     php-version: 8.4
+      #     tools: composer:v2
+      # - run: |
+      #     gh release --repo composer/composer download --pattern composer.phar
+      #     gh attestation verify --repo composer/composer composer.phar
+      # - run: composer install --no-dev
+      # - run: ./ci/opcache.sh
+      - uses: ./.github/actions/php
