@@ -1,0 +1,1 @@
+/opt/zero/wordpress/wp-includes/class-wpdb.php

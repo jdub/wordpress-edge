@@ -17,13 +17,14 @@ jobs:
         uses: ./.github/actions/composer
       - name: Prime the opcache
         run: ./.github/opcache.sh
+      - run: ln -s . zero
       - uses: actions/upload-artifact@v6
         with:
           name: zero
           path: |
-            /opt/bref
-            /opt/zero/bootstrap.php
-            /opt/zero/opcache
-            /opt/zero/vendor
-            /opt/zero/wordpress
-            /opt/zero/wp-config.php
+            bref
+            zero/bootstrap.php
+            zero/opcache
+            zero/vendor
+            zero/wordpress
+            zero/wp-config.php
