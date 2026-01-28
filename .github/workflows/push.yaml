@@ -10,6 +10,7 @@ jobs:
       image: bref/php-85:v3
       volumes: [/opt/zero]
     steps:
+      - run: dnf -y install findutils
       - run: find /opt -type d
       - uses: actions/checkout@v6
       # - name: Download composer.phar
