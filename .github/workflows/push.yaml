@@ -5,25 +5,29 @@ on: push
 jobs:
   layer:
     name: Layer
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    container:
+      image: bref/php-85:v3
+      volumes: [/opt/zero]
     steps:
+      - run: find /opt -type d
       - uses: actions/checkout@v6
-      - name: Download composer.phar
-        env:
-          GH_TOKEN: ${{github.token}}
-        run: |
-          gh release --repo composer/composer download --pattern composer.phar
-          gh attestation verify --repo composer/composer composer.phar
-      - name: Composer
-        uses: ./.github/actions/php
-      - run: ln -s . zero
-      - uses: actions/upload-artifact@v6
-        with:
-          name: zero
-          path: |
-            bref
-            zero/bootstrap.php
-            zero/opcache
-            zero/vendor
-            zero/wordpress
-            zero/wp-config.php
+      # - name: Download composer.phar
+      #   env:
+      #     GH_TOKEN: ${{github.token}}
+      #   run: |
+      #     gh release --repo composer/composer download --pattern composer.phar
+      #     gh attestation verify --repo composer/composer composer.phar
+      # - name: Composer
+      #   uses: ./.github/actions/php
+      # - run: ln -s . zero
+      # - uses: actions/upload-artifact@v6
+      #   with:
+      #     name: zero
+      #     path: |
+      #       bref
+      #       zero/bootstrap.php
+      #       zero/opcache
+      #       zero/vendor
+      #       zero/wordpress
+      #       zero/wp-config.php
