@@ -8,7 +8,7 @@ find /opt/zero -name '*.php' -type f | xargs -n1 -P$(nproc) /opt/bin/php \
   -d 'opcache.jit=function' \
   -d 'opcache.file_cache=/opt/zero/opcache' \
   -d 'opcache.file_cache_only=true' \
-  -r 'opcache_compile_file($argv[1]);'
+  -r 'echo "."; opcache_compile_file($argv[1]);'
 
 # fix opcache permissions
 chmod -R go+rX /opt/zero/opcache

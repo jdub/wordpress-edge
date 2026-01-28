@@ -6,15 +6,15 @@
         "classmap-authoritative": true,
         "optimize-autoloader": true,
         "platform": {
-            "php": "8.3"
+            "php": "8.5"
         }
     },
 
     "require": {
         "aws/aws-sdk-php": "^3.369",
         "bref/bref": "=2.4.17",
-        "johnpbloch/wordpress": "^6.9",
-        "php": "^8.3",
+        "johnpbloch/wordpress": "~6.9",
+        "php": "~8.5",
         "amnuts/opcache-gui": "^3.6"
     },
 
