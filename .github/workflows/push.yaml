@@ -8,16 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: bref/php-85:v3
-      volumes: [/opt/zero]
+      volumes:
+        - ${{ github.workspace }}:/opt/zero
     steps:
       # - uses: ./.github/actions/prepare-al2023
       - run: dnf -y install findutils gzip tar
       - uses: actions/checkout@v6
       - run: find /opt -type f | sort
-      - run: find . -type f | sort
-      - run: |
-          pwd
-          env
+      # - run: |
+      #     pwd
+      #     env
       # - name: Download composer.phar
       #   env:
       #     GH_TOKEN: ${{github.token}}
