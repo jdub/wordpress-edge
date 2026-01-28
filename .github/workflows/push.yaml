@@ -12,8 +12,9 @@ jobs:
     steps:
       # - uses: ./.github/actions/prepare-al2023
       - run: dnf -y install findutils gzip tar
-      - run: find /opt -type f | sort
       - uses: actions/checkout@v6
+      - run: find /opt -type f | sort
+      - run: find . -type f | sort
       # - name: Download composer.phar
       #   env:
       #     GH_TOKEN: ${{github.token}}
