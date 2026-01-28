@@ -1,8 +1,3 @@
-name: Composer
-
-branding:
-  icon: package
-
 inputs:
   version:
     default: 2.9.4
@@ -12,9 +7,17 @@ runs:
   steps:
     - run: curl --silent --location --output /usr/local/bin/composer.phar https://github.com/composer/composer/releases/download/${{ inputs.version }}/composer.phar
       shell: bash
+    - run: echo "dir=$(/opt/bin/php /usr/local/bin/composer.phar config cache-files-dir)" >> $GITHUB_OUTPUT
+      shell: bash
+      id: cache-files-dir
+    - uses: actions/cache@v5
+      with:
+        path: ${{ steps.cache-files-dir.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
     - run: /opt/bin/php /usr/local/bin/composer.phar install --no-dev
       shell: bash
       env:
         COMPOSER_NO_AUDIT: 1
         COMPOSER_NO_INTERACTION: 1
-        COMPOSER_PROCESS_TIMEOUT: 1
+        COMPOSER_PROCESS_TIMEOUT: 0

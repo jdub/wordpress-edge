@@ -11,12 +11,12 @@ jobs:
       volumes:
         - ${{ github.workspace }}:/opt/zero
     steps:
-      # - uses: ./.github/actions/prepare-al2023
       - run: dnf -y install findutils gzip tar
       - uses: actions/checkout@v6
-      - uses: ./.github/actions/composer
-      - run: /opt/bin/php /usr/local/bin/composer.phar config cache-files-dir
-      # - run: find /opt -type d | sort
+      - name: Composer
+        id: composer
+        uses: ./.github/actions/composer
+      - run: find /opt/zero -name '*.php' -type f
       # - uses: actions/upload-artifact@v6
       #   with:
       #     name: zero
