@@ -1,0 +1,14 @@
+branding:
+  icon: package
+
+inputs:
+  version:
+    default: 2.9.4
+
+runs:
+  using: composite
+  steps:
+    - run: curl --silent --location --output /usr/local/bin/composer.phar https://github.com/composer/composer/releases/download/${{ inputs.version }}/composer.phar
+      shell: bash
+    - run: /opt/bin/php /usr/local/bin/composer.phar install --no-dev
+      shell: bash
