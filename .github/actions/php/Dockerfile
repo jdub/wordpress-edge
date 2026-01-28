@@ -1,4 +1,4 @@
-FROM bref/php-84:2.3.38
+FROM bref/php-85:v3
 
 CMD [".github/actions/php/opcache.sh"]
 ENTRYPOINT ["/bin/bash"]
