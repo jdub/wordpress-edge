@@ -11,3 +11,6 @@ find vendor wordpress -name '*.php' -type f | xargs -n1 -P$(nproc) php \
   -d "opcache.file_cache=$(pwd)/opcache" \
   -d "opcache.file_cache_only=true" \
   -r 'echo "."; opcache_compile_file($argv[1]);'
+
+# fix opcache permissions
+chmod -R go+rX opcache
