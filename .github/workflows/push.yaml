@@ -11,7 +11,7 @@ jobs:
       volumes: [/opt/zero]
     steps:
       # - uses: ./.github/actions/prepare-al2023
-      - run: dnf -y install findutils tar
+      - run: dnf -y install findutils gzip tar
       - run: find /opt -type f | sort
       - uses: actions/checkout@v6
       # - name: Download composer.phar
