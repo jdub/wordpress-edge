@@ -14,16 +14,16 @@ jobs:
       - run: dnf -y install findutils gzip tar
       - uses: actions/checkout@v6
       - name: Composer
-        id: composer
         uses: ./.github/actions/composer
-      - run: find /opt/zero -name '*.php' -type f
-      # - uses: actions/upload-artifact@v6
-      #   with:
-      #     name: zero
-      #     path: |
-      #       bref
-      #       zero/bootstrap.php
-      #       zero/opcache
-      #       zero/vendor
-      #       zero/wordpress
-      #       zero/wp-config.php
+      - name: Prime the opcache
+        run: ./.github/opcache.sh
+      - uses: actions/upload-artifact@v6
+        with:
+          name: zero
+          path: |
+            /opt/bref
+            /opt/zero/bootstrap.php
+            /opt/zero/opcache
+            /opt/zero/vendor
+            /opt/zero/wordpress
+            /opt/zero/wp-config.php
