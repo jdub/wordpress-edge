@@ -10,7 +10,8 @@ jobs:
       image: bref/php-85:v3
       volumes: [/opt/zero]
     steps:
-      - uses: ./.github/actions/prepare-al2023
+      # - uses: ./.github/actions/prepare-al2023
+      - run: dnf -y install findutils tar
       - run: find /opt -type f | sort
       - uses: actions/checkout@v6
       # - name: Download composer.phar
