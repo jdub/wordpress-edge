@@ -14,8 +14,8 @@ jobs:
       # - uses: ./.github/actions/prepare-al2023
       - run: dnf -y install findutils gzip tar
       - uses: actions/checkout@v6
-      - run: curl --remote-name https://github.com/composer/composer/releases/download/2.9.4/composer.phar
-      - run: php composer.phar install --no-dev
+      - run: curl --progress-bar --location --remote-name https://github.com/composer/composer/releases/download/2.9.4/composer.phar
+      - run: /opt/bin/php composer.phar install --no-dev
       - run: find /opt -type d | sort
       # - run: |
       #     pwd
