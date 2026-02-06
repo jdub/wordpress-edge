@@ -13,12 +13,13 @@ jobs:
     steps:
       - run: dnf -y install findutils gzip tar
       - uses: actions/checkout@v6
+      # FIXME: perhaps publish a separate arch-dependent layer?
+      - run: mkdir -p bref/extensions && cp /opt/bref/extensions/xdebug.so bref/extensions/
       - name: Composer
         uses: ./.github/actions/composer
       - name: Prime the opcache
         run: ./.github/opcache.sh
       - run: ln -s . zero
-      - run: cp /opt/bref/extensions/xdebug.so bref/extensions/
       - uses: actions/upload-artifact@v6
         with:
           name: zero
