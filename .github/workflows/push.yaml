@@ -7,7 +7,7 @@ jobs:
     name: Layer
     runs-on: ubuntu-latest
     container:
-      image: bref/php-85:v3
+      image: bref/php-85-dev:v3
       volumes:
         - ${{ github.workspace }}:/opt/zero
     steps:
@@ -18,6 +18,7 @@ jobs:
       - name: Prime the opcache
         run: ./.github/opcache.sh
       - run: ln -s . zero
+      - run: cp /opt/bref/extensions/xdebug.so bref/extensions/
       - uses: actions/upload-artifact@v6
         with:
           name: zero
